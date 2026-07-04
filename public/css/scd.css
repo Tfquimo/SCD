@@ -1,0 +1,468 @@
+/* ============================================================
+   SCD — Folha de estilos principal
+   Inspirado no design "Gig Share": sidebar escura, conteúdo branco
+   limpo, verde-sage e púrpura como destaques premium.
+   ============================================================ */
+
+/* ── Inter (auto-hospedada) ──────────────────────────────── */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/inter/inter-400.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/fonts/inter/inter-500.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/fonts/inter/inter-600.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/inter/inter-700.woff2') format('woff2');
+}
+
+/* ── Design tokens ───────────────────────────────────────── */
+:root {
+    /* Cores principais — extraídas da imagem de referência */
+    --scd-primary:       #7EB8A4;  /* Verde-sage (botão "Upgrade Plan" da imagem) */
+    --scd-primary-dark:  #5E9E8C;  /* Verde-sage escuro (hover) */
+    --scd-accent:        #5B4FCF;  /* Púrpura (folder Branding na imagem) */
+    --scd-sidebar-bg:    #3D4A5C;  /* Cinzento-azul escuro da sidebar da imagem */
+    --scd-sidebar-text:  #CBD5E0;  /* Texto claro da sidebar */
+    --scd-sidebar-hover: rgba(255,255,255,0.08);
+    --scd-sidebar-active:rgba(255,255,255,0.15);
+    --scd-sidebar-border:rgba(255,255,255,0.08);
+    --scd-success:       #7EB8A4;
+    --scd-danger:        #E53E3E;
+    --scd-warning:       #ED8936;
+    --scd-bg:            #F2F3F7;  /* Fundo levemente acinzentado do conteúdo */
+    --scd-surface:       #FFFFFF;
+    --scd-surface-2:     #F7F8FA;
+    --scd-border:        #E8ECF0;
+    --scd-text:          #1A202C;  /* Preto suave, como na imagem */
+    --scd-text-muted:    #718096;
+    --scd-radius:        10px;
+    --scd-radius-lg:     14px;
+    --scd-shadow:        0 2px 8px rgba(0,0,0,0.06), 0 0 1px rgba(0,0,0,0.04);
+    --scd-shadow-md:     0 4px 20px rgba(0,0,0,0.08), 0 0 1px rgba(0,0,0,0.04);
+    --scd-transition:    .18s ease;
+}
+
+/* ── Base ────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--scd-bg);
+    color: var(--scd-text);
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--scd-border); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: var(--scd-text-muted); }
+
+/* ── Botões ──────────────────────────────────────────────── */
+
+/* Botão principal — Verde-sage (igual ao "Upgrade Plan" da imagem) */
+.btn-scd-primary {
+    background: var(--scd-primary);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: .88rem;
+    border-radius: var(--scd-radius);
+    padding: .55rem 1.35rem;
+    transition: background var(--scd-transition), transform var(--scd-transition);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    text-decoration: none;
+    line-height: 1;
+}
+.btn-scd-primary:hover {
+    background: var(--scd-primary-dark);
+    color: #fff;
+    transform: translateY(-1px);
+}
+.btn-scd-primary:active  { transform: scale(0.98); }
+.btn-scd-primary:disabled { opacity: .5; pointer-events: none; }
+
+/* Botão perigo */
+.btn-scd-danger {
+    background: rgba(229,62,62,.10);
+    border: 1px solid rgba(229,62,62,.20);
+    color: var(--scd-danger);
+    font-weight: 500;
+    border-radius: var(--scd-radius);
+    padding: .5rem 1.1rem;
+    transition: background var(--scd-transition);
+    cursor: pointer;
+}
+.btn-scd-danger:hover {
+    background: rgba(229,62,62,.18);
+    color: var(--scd-danger);
+}
+
+/* Botão ghost neutro */
+.btn-scd-ghost {
+    background: transparent;
+    border: 1px solid var(--scd-border);
+    color: var(--scd-text-muted);
+    font-weight: 500;
+    border-radius: var(--scd-radius);
+    padding: .5rem 1.1rem;
+    transition: background var(--scd-transition), color var(--scd-transition);
+    cursor: pointer;
+}
+.btn-scd-ghost:hover {
+    background: var(--scd-surface-2);
+    color: var(--scd-text);
+}
+
+/* ── Formulários ─────────────────────────────────────────── */
+.form-label {
+    font-size: .82rem;
+    font-weight: 500;
+    color: var(--scd-text-muted);
+    margin-bottom: .35rem;
+}
+.form-control, .form-select {
+    background: var(--scd-surface);
+    border: 1.5px solid var(--scd-border);
+    color: var(--scd-text);
+    border-radius: var(--scd-radius);
+    padding: .6rem .95rem;
+    font-size: .9rem;
+    font-family: inherit;
+    transition: border-color var(--scd-transition), box-shadow var(--scd-transition);
+}
+.form-control:focus, .form-select:focus {
+    background: var(--scd-surface);
+    border-color: var(--scd-primary);
+    box-shadow: 0 0 0 3px rgba(126,184,164,.18);
+    color: var(--scd-text);
+    outline: none;
+}
+.form-control::placeholder { color: #A0AEC0; }
+.form-control.is-invalid   { border-color: var(--scd-danger); box-shadow: 0 0 0 3px rgba(229,62,62,.10); }
+.invalid-feedback          { font-size: .8rem; color: var(--scd-danger); }
+
+.input-group-text {
+    background: var(--scd-surface-2);
+    border: 1.5px solid var(--scd-border);
+    border-right: none;
+    color: var(--scd-text-muted);
+    border-radius: var(--scd-radius) 0 0 var(--scd-radius);
+}
+
+/* ── Alertas ─────────────────────────────────────────────── */
+.alert-scd-danger {
+    background: rgba(229,62,62,.07);
+    border: 1px solid rgba(229,62,62,.18);
+    border-left: 3px solid var(--scd-danger);
+    border-radius: var(--scd-radius);
+    color: var(--scd-danger);
+    font-size: .85rem;
+    padding: .8rem 1rem;
+}
+.alert-scd-success {
+    background: rgba(126,184,164,.08);
+    border: 1px solid rgba(126,184,164,.22);
+    border-left: 3px solid var(--scd-primary);
+    border-radius: var(--scd-radius);
+    color: var(--scd-primary-dark);
+    font-size: .85rem;
+    padding: .8rem 1rem;
+}
+.alert-scd-info {
+    background: rgba(91,79,207,.07);
+    border: 1px solid rgba(91,79,207,.18);
+    border-left: 3px solid var(--scd-accent);
+    border-radius: var(--scd-radius);
+    color: var(--scd-accent);
+    font-size: .85rem;
+    padding: .8rem 1rem;
+}
+.alert-scd-warning {
+    background: rgba(237,137,54,.07);
+    border: 1px solid rgba(237,137,54,.18);
+    border-left: 3px solid var(--scd-warning);
+    border-radius: var(--scd-radius);
+    color: var(--scd-warning);
+    font-size: .85rem;
+    padding: .8rem 1rem;
+}
+
+/* ── Cartões (Cards) ─────────────────────────────────────── */
+/* Cartão branco standard — igual aos da imagem */
+.scd-card {
+    background: var(--scd-surface);
+    border: 1px solid var(--scd-border);
+    border-radius: var(--scd-radius-lg);
+    box-shadow: var(--scd-shadow);
+}
+
+/* Cartão colorido estilo "folder card" da imagem */
+.scd-folder-card {
+    border-radius: var(--scd-radius-lg);
+    padding: 1.2rem;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    min-height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.scd-folder-card.green  { background: var(--scd-primary); }
+.scd-folder-card.purple { background: var(--scd-accent); }
+
+/* ── Badges / Pills ──────────────────────────────────────── */
+.badge-role-admin    { background: rgba(91,79,207,.12);  color: var(--scd-accent); border: 1px solid rgba(91,79,207,.22); border-radius: 6px; padding: .2rem .6rem; font-size: .72rem; font-weight: 600; }
+.badge-role-manager  { background: rgba(126,184,164,.12);color: var(--scd-primary-dark); border: 1px solid rgba(126,184,164,.25); border-radius: 6px; padding: .2rem .6rem; font-size: .72rem; font-weight: 600; }
+.badge-role-employee { background: rgba(113,128,150,.10);color: var(--scd-text-muted); border: 1px solid rgba(113,128,150,.2); border-radius: 6px; padding: .2rem .6rem; font-size: .72rem; font-weight: 600; }
+.badge-active   { background: rgba(126,184,164,.12); color: var(--scd-primary-dark); border: 1px solid rgba(126,184,164,.25); border-radius: 6px; padding: .18rem .55rem; font-size: .72rem; }
+.badge-inactive { background: rgba(229,62,62,.10);   color: var(--scd-danger);       border: 1px solid rgba(229,62,62,.2);   border-radius: 6px; padding: .18rem .55rem; font-size: .72rem; }
+
+/* ── Tabelas ─────────────────────────────────────────────── */
+.scd-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: .88rem;
+}
+.scd-table th {
+    padding: .75rem 1rem;
+    font-size: .72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--scd-text-muted);
+    border-bottom: 1px solid var(--scd-border);
+    white-space: nowrap;
+}
+.scd-table td {
+    padding: .85rem 1rem;
+    color: var(--scd-text);
+    border-bottom: 1px solid var(--scd-border);
+    vertical-align: middle;
+}
+.scd-table tr:last-child td { border-bottom: none; }
+.scd-table tbody tr { transition: background var(--scd-transition); }
+.scd-table tbody tr:hover { background: var(--scd-surface-2); }
+
+/* ── Links ───────────────────────────────────────────────── */
+a.scd-link {
+    color: var(--scd-accent);
+    text-decoration: none;
+    transition: color var(--scd-transition);
+}
+a.scd-link:hover { color: var(--scd-primary-dark); }
+
+/* ── Utilitários ─────────────────────────────────────────── */
+.text-scd-muted   { color: var(--scd-text-muted) !important; }
+.text-scd-primary { color: var(--scd-primary)     !important; }
+.text-scd-accent  { color: var(--scd-accent)      !important; }
+.text-scd-success { color: var(--scd-primary)     !important; }
+.text-scd-danger  { color: var(--scd-danger)      !important; }
+.bg-scd-surface   { background: var(--scd-surface)   !important; }
+.bg-scd-surface-2 { background: var(--scd-surface-2) !important; }
+.border-scd       { border-color: var(--scd-border)   !important; }
+
+/* ── Animações ───────────────────────────────────────────── */
+@keyframes fade-up {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}
+.anim-fade-up { animation: fade-up .35s ease both; }
+
+@keyframes orb-float {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(30px, 20px) scale(1.06); }
+}
+
+/* ── Ecrã de Auth ────────────────────────────────────────── */
+.auth-bg {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--scd-bg);
+}
+.auth-bg::before, .auth-bg::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: .18;
+    pointer-events: none;
+    animation: orb-float 12s ease-in-out infinite alternate;
+}
+.auth-bg::before {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, var(--scd-primary), transparent);
+    top: -120px; left: -120px;
+}
+.auth-bg::after {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, var(--scd-accent), transparent);
+    bottom: -80px; right: -80px;
+    animation-delay: -6s;
+}
+
+.auth-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 440px;
+    padding: 2.4rem;
+    animation: fade-up .4s ease both;
+    background: var(--scd-surface);
+    border-radius: 16px;
+    box-shadow: var(--scd-shadow-md);
+    border: 1px solid var(--scd-border);
+}
+
+.auth-logo { display: flex; align-items: center; gap: .65rem; text-decoration: none; margin-bottom: 2rem; }
+.auth-logo-icon {
+    width: 42px; height: 42px;
+    background: var(--scd-primary);
+    border-radius: var(--scd-radius);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; color: #fff;
+    flex-shrink: 0;
+}
+.auth-logo-name {
+    font-size: 1.35rem; font-weight: 700;
+    color: var(--scd-text);
+    line-height: 1.1;
+}
+.auth-logo-sub {
+    font-size: .63rem; font-weight: 400;
+    color: var(--scd-text-muted);
+}
+
+.auth-title    { font-size: 1.45rem; font-weight: 700; color: var(--scd-text); margin-bottom: .3rem; }
+.auth-subtitle { font-size: .87rem; color: var(--scd-text-muted); margin-bottom: 1.6rem; }
+
+.auth-divider {
+    display: flex; align-items: center; gap: 1rem;
+    margin: 1.3rem 0; color: var(--scd-text-muted); font-size: .78rem;
+}
+.auth-divider::before, .auth-divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--scd-border);
+}
+
+.security-badge {
+    display: flex; align-items: center; justify-content: center;
+    gap: .4rem; font-size: .72rem; color: var(--scd-text-muted);
+    margin-top: 1.5rem;
+}
+.security-badge .bi-shield-check-fill { color: var(--scd-primary); }
+
+/* ═══════════════════════════════════════════════════════════
+   LAYOUT DA APLICAÇÃO — Sidebar + Topbar + Conteúdo
+   Inspirado no design da imagem: sidebar charcoal + conteúdo branco.
+═══════════════════════════════════════════════════════════ */
+
+/* ── Sidebar ─────────────────────────────────────────────── */
+.scd-sidebar {
+    width: 240px;
+    min-height: 100vh;
+    background: var(--scd-sidebar-bg); /* Charcoal escuro da sidebar da imagem */
+    border-right: none;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 100;
+    transition: transform var(--scd-transition);
+}
+
+/* Área de navegação principal */
+.scd-main {
+    margin-left: 240px;
+    min-height: 100vh;
+    background: var(--scd-bg);
+}
+
+/* Topbar / Barra superior */
+.scd-topbar {
+    height: 58px;
+    background: var(--scd-surface);
+    border-bottom: 1px solid var(--scd-border);
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.scd-content { padding: 1.75rem 1.5rem; }
+
+/* ── Links de navegação da Sidebar ──────────────────────── */
+.nav-link-scd {
+    display: flex; align-items: center; gap: .6rem;
+    padding: .55rem .9rem;
+    border-radius: 8px;
+    color: var(--scd-sidebar-text);
+    text-decoration: none;
+    font-size: .85rem;
+    font-weight: 500;
+    transition: background var(--scd-transition), color var(--scd-transition);
+    margin: .08rem 0;
+}
+.nav-link-scd:hover {
+    background: var(--scd-sidebar-hover);
+    color: #fff;
+}
+/* Estado activo — verde-sage, igual ao destaque da imagem */
+.nav-link-scd.active {
+    background: var(--scd-primary);
+    color: #fff;
+}
+.nav-link-scd.active:hover {
+    background: var(--scd-primary-dark);
+}
+.nav-link-scd i { font-size: .95rem; width: 18px; text-align: center; opacity: .85; }
+.nav-link-scd.active i { opacity: 1; }
+
+/* Rótulos de secção da sidebar */
+.nav-section-label {
+    font-size: .65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: rgba(203,213,224,.45);
+    padding: 1.1rem .9rem .35rem;
+}
+
+/* ── Responsivo: mobile ──────────────────────────────────── */
+@media (max-width: 991.98px) {
+    .scd-sidebar { transform: translateX(-100%); }
+    .scd-sidebar.open { transform: translateX(0); }
+    .scd-main { margin-left: 0; }
+}

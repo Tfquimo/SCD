@@ -1,0 +1,54 @@
+services:
+  - type: web
+    name: scd-app
+    runtime: php
+    # Comando que instala tudo e faz a build
+    buildCommand: ./render-build.sh
+    # Comando que inicia o servidor Laravel em produção
+    startCommand: php artisan serve --host=0.0.0.0 --port=$PORT
+    # Plano gratuito
+    plan: free
+    # Variáveis de ambiente que o Render vai precisar
+    # ⚠️  Os valores SENSÍVEIS devem ser inseridos manualmente
+    #     no painel do Render (Environment > Add Environment Variable)
+    #     e NÃO devem ser colocados aqui no ficheiro.
+    envVars:
+      - key: APP_NAME
+        value: SCD
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_TIMEZONE
+        value: UTC
+      - key: APP_LOCALE
+        value: pt
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: LOG_LEVEL
+        value: error
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_PORT
+        value: 5432
+      - key: DB_SSLMODE
+        value: require
+      - key: SESSION_DRIVER
+        value: database
+      - key: SESSION_LIFETIME
+        value: 120
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: FILESYSTEM_DISK
+        value: local
+      - key: BROADCAST_CONNECTION
+        value: log
+      # ↓ Estas variáveis DEVEM ser inseridas manualmente no painel do Render
+      # APP_KEY        → resultado de: php artisan key:generate --show
+      # APP_URL        → https://scd-app.onrender.com (URL que o Render atribuir)
+      # DB_HOST        → host do Neon.tech
+      # DB_DATABASE    → nome do banco no Neon.tech
+      # DB_USERNAME    → utilizador do Neon.tech
+      # DB_PASSWORD    → senha do Neon.tech
