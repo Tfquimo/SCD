@@ -1,11 +1,7 @@
 services:
   - type: web
     name: scd-app
-    env: php
-    # Comando que instala tudo e faz a build
-    buildCommand: ./render-build.sh
-    # Comando que inicia o servidor Laravel em produção
-    startCommand: php artisan serve --host=0.0.0.0 --port=$PORT
+    env: docker
     # Plano gratuito
     plan: free
     # Variáveis de ambiente que o Render vai precisar
