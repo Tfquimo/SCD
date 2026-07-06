@@ -258,7 +258,7 @@
         /* Features Section */
         .features-section {
             padding: 5rem 5%;
-            background: #f8fafc;
+            background: var(--section-bg, #f8fafc);
             text-align: center;
         }
 
@@ -351,6 +351,47 @@
             text-align: center;
         }
 
+        /* ── Dark Theme Variables & Styles ── */
+        body.dark-theme {
+            --text-dark: #f8fafc;
+            --text-muted: #cbd5e1;
+            --bg-light: #0f172a;
+            --section-bg: #1e293b;
+        }
+        
+        body.dark-theme .navbar-custom {
+            background: rgba(15, 23, 42, 0.9);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        body.dark-theme .btn-outline {
+            color: #f8fafc;
+            border-color: #334155;
+        }
+        body.dark-theme .btn-outline:hover { background: #1e293b; }
+        
+        body.dark-theme .feature-card,
+        body.dark-theme .features-footer,
+        body.dark-theme .btn-lg-outline {
+            background: #1e293b;
+            border-color: #334155;
+            color: #f8fafc;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        body.dark-theme .btn-lg-outline:hover { background: #334155; }
+        
+        body.dark-theme .hero-features {
+            border-top-color: #334155;
+        }
+        body.dark-theme .hf-text strong {
+            color: #f8fafc;
+        }
+        
+        body.dark-theme .step-card:not(.step-card-active) {
+            border-color: #334155 !important;
+            background: #1e293b !important;
+        }
+
         /* ── Responsive Mobile ── */
         @media (max-width: 991.98px) {
             .hero {
@@ -439,7 +480,7 @@
         </div>
 
         <div class="nav-actions">
-            <i class="bi bi-moon" style="font-size:1.1rem;color:var(--text-dark);cursor:pointer;margin-right:.5rem;"></i>
+            <i id="themeToggle" class="bi bi-moon" style="font-size:1.1rem;color:var(--text-dark);cursor:pointer;margin-right:.5rem;transition:color 0.2s;"></i>
             <a href="{{ route('login') }}" class="btn-green">Entrar</a>
         </div>
     </nav>
@@ -528,23 +569,23 @@
     </section>
 
     <!-- COMO FUNCIONA -->
-    <section id="como-funciona" class="generic-section" style="background: white;">
+    <section id="como-funciona" class="generic-section" style="background: var(--bg-light);">
         <div class="section-subtitle">COMO FUNCIONA</div>
         <h2 class="section-title" style="margin-bottom: 2rem;">Simples. Rápido. <span>Seguro.</span></h2>
         <p style="color:var(--text-muted);margin-bottom:4rem;">A encriptação não tem de ser complicada. Em três passos o seu ficheiro fica blindado contra qualquer interceção.</p>
         
         <div style="display:flex;gap:2rem;text-align:left;">
-            <div style="flex:1;padding:2rem;border:1px solid #edf2f7;border-radius:12px;">
+            <div class="step-card" style="flex:1;padding:2rem;border:1px solid #edf2f7;border-radius:12px;">
                 <div style="font-size:2rem;color:var(--brand-green);font-weight:800;margin-bottom:1rem;">1.</div>
                 <h4 style="font-weight:700;font-size:1.1rem;">Escolha o Ficheiro</h4>
                 <p style="font-size:.9rem;color:var(--text-muted);">Selecione qualquer documento, imagem ou base de dados. Não há restrição de formato.</p>
             </div>
-            <div style="flex:1;padding:2rem;border:1px solid #edf2f7;border-radius:12px;background:var(--brand-green);color:white;">
+            <div class="step-card step-card-active" style="flex:1;padding:2rem;border:1px solid #edf2f7;border-radius:12px;background:var(--brand-green);color:white;">
                 <div style="font-size:2rem;color:var(--brand-green-light);font-weight:800;margin-bottom:1rem;">2.</div>
                 <h4 style="font-weight:700;font-size:1.1rem;color:white;">Criptografia AES-256</h4>
                 <p style="font-size:.9rem;color:rgba(255,255,255,0.8);">O algoritmo militar tranca a informação em microsegundos com uma chave única.</p>
             </div>
-            <div style="flex:1;padding:2rem;border:1px solid #edf2f7;border-radius:12px;">
+            <div class="step-card" style="flex:1;padding:2rem;border:1px solid #edf2f7;border-radius:12px;">
                 <div style="font-size:2rem;color:var(--brand-green);font-weight:800;margin-bottom:1rem;">3.</div>
                 <h4 style="font-weight:700;font-size:1.1rem;">Partilhe em Segurança</h4>
                 <p style="font-size:.9rem;color:var(--text-muted);">Decida quem tem acesso. Revogue as permissões a qualquer momento com um clique.</p>
@@ -554,7 +595,7 @@
 
 
     <!-- SOBRE -->
-    <section id="sobre" class="generic-section" style="background: white;">
+    <section id="sobre" class="generic-section" style="background: var(--bg-light);">
         <div class="section-subtitle">A NOSSA MISSÃO</div>
         <h2 class="section-title">A privacidade não é um luxo.<br>É um <span>direito fundamental.</span></h2>
         <p style="color:var(--text-muted);font-size:1.1rem;line-height:1.7;max-width:800px;margin:0 auto 2rem;">
@@ -591,6 +632,27 @@
                 }
             });
         }
+
+        // Tema Claro / Escuro
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Verifica se o utilizador já tinha preferência no browser ou no SO
+        if (localStorage.getItem('scd_theme') === 'dark' || (!('scd_theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.body.classList.add('dark-theme');
+            themeToggle.classList.replace('bi-moon', 'bi-sun-fill');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            
+            if (document.body.classList.contains('dark-theme')) {
+                themeToggle.classList.replace('bi-moon', 'bi-sun-fill');
+                localStorage.setItem('scd_theme', 'dark');
+            } else {
+                themeToggle.classList.replace('bi-sun-fill', 'bi-moon');
+                localStorage.setItem('scd_theme', 'light');
+            }
+        });
     </script>
 </body>
 </html>
