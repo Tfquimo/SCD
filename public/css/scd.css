@@ -465,4 +465,30 @@ a.scd-link:hover { color: var(--scd-primary-dark); }
     .scd-sidebar { transform: translateX(-100%); }
     .scd-sidebar.open { transform: translateX(0); }
     .scd-main { margin-left: 0; }
+    
+    .scd-content { padding: 1.25rem 1rem; }
+    .scd-topbar { padding: 0 1rem; }
+    .auth-card { padding: 1.75rem; margin: 0 1rem; width: auto; max-width: 100%; }
+    .auth-title { font-size: 1.25rem; }
+}
+
+@media (max-width: 575.98px) {
+    .scd-content { padding: 1rem 0.75rem; }
+    .auth-card { padding: 1.5rem; }
+}
+
+/* Sidebar Backdrop */
+.sidebar-backdrop {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(26, 32, 44, 0.5);
+    z-index: 90;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--scd-transition);
+    backdrop-filter: blur(2px);
+}
+.sidebar-backdrop.show {
+    opacity: 1;
+    pointer-events: auto;
 }

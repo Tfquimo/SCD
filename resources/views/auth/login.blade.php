@@ -81,7 +81,7 @@
 
     {{-- Security info --}}
     <div class="auth-divider">Informação de segurança</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));gap:.6rem;">
         <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:.65rem .8rem;display:flex;align-items:center;gap:.5rem;">
             <i class="bi bi-shield-fill-check" style="color:var(--scd-success);font-size:.9rem;"></i>
             <span style="font-size:.75rem;color:var(--scd-text-muted);">AES-256-CBC</span>

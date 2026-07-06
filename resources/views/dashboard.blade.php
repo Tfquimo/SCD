@@ -15,7 +15,7 @@
             {{ now()->format('l, d \d\e F \d\e Y') }} &mdash; Sistema SCD operacional.
         </p>
     </div>
-    <div style="display:flex;gap:.65rem;flex-wrap:wrap;align-items:center;">
+    <div class="d-flex flex-wrap align-items-center gap-2 mt-3 mt-md-0 justify-content-start justify-content-md-end">
         <a href="{{ route('files.index') }}" class="btn-scd-primary" style="text-decoration:none;">
             <i class="bi bi-cloud-upload"></i> Upload Seguro
         </a>
@@ -75,7 +75,7 @@
         </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1.25rem;">
 
         {{-- ── Algoritmo de Encriptação ─────────────────────────── --}}
         <div style="background:var(--scd-surface);border:1px solid var(--scd-border);border-radius:var(--scd-radius);padding:1.1rem;">

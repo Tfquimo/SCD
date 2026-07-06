@@ -19,6 +19,7 @@
 {{-- ════════════════════════════════════════════════
      SIDEBAR — Estilo charcoal escuro (inspirado na imagem de referência)
 ════════════════════════════════════════════════ --}}
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 <aside class="scd-sidebar" id="scdSidebar">
 
     {{-- Logo / Marca --}}
@@ -210,13 +211,20 @@
     // Toggle da sidebar no mobile
     const sidebar = document.getElementById('scdSidebar');
     const toggle  = document.getElementById('sidebarToggle');
+    const backdrop = document.getElementById('sidebarBackdrop');
+    
     if (toggle && sidebar) {
-        toggle.addEventListener('click', () => sidebar.classList.toggle('open'));
-        document.addEventListener('click', e => {
-            if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
-                sidebar.classList.remove('open');
-            }
+        toggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            if (backdrop) backdrop.classList.toggle('show');
         });
+        
+        if (backdrop) {
+            backdrop.addEventListener('click', () => {
+                sidebar.classList.remove('open');
+                backdrop.classList.remove('show');
+            });
+        }
     }
 </script>
 @stack('scripts')
