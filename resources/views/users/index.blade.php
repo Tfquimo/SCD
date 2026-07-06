@@ -83,7 +83,7 @@
                                 @elseif($user->active)
                                     <span class="badge bg-success bg-opacity-20 text-success rounded-pill px-3"><i class="bi bi-check-circle me-1"></i>Activo</span>
                                 @else
-                                    <span class="badge bg-secondary bg-opacity-20 text-secondary rounded-pill px-3"><i class="bi bi-dash-circle me-1"></i>Inactivo</span>
+                                    <span class="badge bg-danger bg-opacity-20 text-danger rounded-pill px-3"><i class="bi bi-dash-circle me-1"></i>Inactivo</span>
                                 @endif
                             </td>
                             <td class="py-3">

@@ -85,8 +85,8 @@
                 <div class="mb-4">
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" id="active" name="active" value="1"
-                               {{ old('active', '1') ? 'checked' : '' }}>
-                        <label class="form-check-label text-muted" for="active">Conta activa</label>
+                               {{ old('active', '1') ? 'checked' : '' }} onchange="toggleActiveLabel()">
+                        <label class="form-check-label text-success fw-bold" for="active" id="activeLabel">Activo</label>
                     </div>
                 </div>
 
@@ -100,4 +100,22 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    function toggleActiveLabel() {
+        const checkbox = document.getElementById('active');
+        const label = document.getElementById('activeLabel');
+        if (checkbox.checked) {
+            label.textContent = 'Activo';
+            label.className = 'form-check-label text-success fw-bold';
+        } else {
+            label.textContent = 'Inactivo';
+            label.className = 'form-check-label text-danger fw-bold';
+        }
+    }
+    // Set initial state
+    document.addEventListener('DOMContentLoaded', toggleActiveLabel);
+</script>
+@endpush
 @endsection
