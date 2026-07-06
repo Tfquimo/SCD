@@ -472,9 +472,35 @@ a.scd-link:hover { color: var(--scd-primary-dark); }
     .auth-title { font-size: 1.25rem; }
 }
 
+@media (max-width: 991.98px) {
+    .scd-sidebar { transform: translateX(-100%); }
+    .scd-sidebar.open { transform: translateX(0); }
+    .scd-main { margin-left: 0; }
+    
+    .scd-content { padding: 1.25rem 1rem; }
+    .scd-topbar { padding: 0 1rem; }
+    .auth-card { padding: 1.75rem; margin: 0 1rem; width: auto; max-width: 100%; }
+    .auth-title { font-size: 1.25rem; }
+
+    /* Tables: hide less critical columns on tablet */
+    .hide-on-mobile { display: none !important; }
+}
+
 @media (max-width: 575.98px) {
     .scd-content { padding: 1rem 0.75rem; }
     .auth-card { padding: 1.5rem; }
+
+    /* Make the container flush to edges */
+    .container { padding-left: 0.75rem; padding-right: 0.75rem; }
+
+    /* Cards: reduce padding */
+    .scd-card { border-radius: 8px; }
+
+    /* Dashboard welcome card: stack content vertically */
+    .scd-card[style*="align-items:center"] { flex-direction: column !important; align-items: flex-start !important; }
+
+    /* Ensure table action buttons wrap and don't overflow */
+    td .d-flex { flex-wrap: wrap; }
 }
 
 /* Sidebar Backdrop */

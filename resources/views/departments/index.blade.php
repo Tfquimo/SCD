@@ -5,13 +5,13 @@
 @section('content')
 <div class="container py-4">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
         <div>
             <h1 class="h3 mb-1 text-scd-primary fw-bold"><i class="bi bi-building text-primary me-2"></i>Departamentos</h1>
             <p class="text-muted mb-0">Organização estrutural da empresa e gestores responsáveis.</p>
         </div>
         @can('manage-users')
-        <a href="{{ route('departments.create') }}" class="btn btn-primary px-4">
+        <a href="{{ route('departments.create') }}" class="btn btn-primary px-4 text-center">
             <i class="bi bi-plus-lg me-2"></i>Novo Departamento
         </a>
         @endcan

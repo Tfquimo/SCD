@@ -5,14 +5,14 @@
 
 @section('content')
 <div class="container py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
         <div>
             <h1 class="h3 mb-1 text-scd-primary fw-bold">Cópias de Segurança</h1>
             <p class="text-muted mb-0">Criação, descarga e gestão de arquivos ZIP de backup do sistema (Base de Dados e Ficheiros Encriptados).</p>
         </div>
         <form action="{{ route('backups.create') }}" method="POST">
             @csrf
-            <button type="submit" class="btn btn-primary px-4 py-2" onclick="this.innerHTML='<span class=\'spinner-border spinner-border-sm\' role=\'status\' aria-hidden=\'true\'></span> A Gerar Backup...'; this.disabled=true; this.form.submit();">
+            <button type="submit" class="btn btn-primary px-4 py-2 w-100 w-md-auto" onclick="this.innerHTML='<span class=\'spinner-border spinner-border-sm\' role=\'status\' aria-hidden=\'true\'></span> A Gerar Backup...'; this.disabled=true; this.form.submit();">
                 <i class="bi bi-database-add me-2"></i> Criar Cópia de Segurança
             </button>
         </form>
@@ -58,17 +58,19 @@
                                     {{ $backup['created_at']->format('d/m/Y H:i:s') }} 
                                     <small class="text-muted">({{ $backup['created_at']->diffForHumans() }})</small>
                                 </td>
-                                <td class="pe-4 py-3 text-end">
-                                    <a href="{{ route('backups.download', $backup['name']) }}" class="btn btn-sm btn-outline-primary rounded-pill me-2 px-3">
-                                        <i class="bi bi-download"></i> Descarregar
-                                    </a>
-                                    <form action="{{ route('backups.destroy', $backup['name']) }}" method="POST" class="d-inline" onsubmit="return confirm('Deseja eliminar permanentemente esta cópia de segurança? Esta acção não pode ser revertida.');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-outline-danger rounded-pill px-3">
-                                            <i class="bi bi-trash3"></i>
-                                        </button>
-                                    </form>
+                                <td class="pe-4 py-3">
+                                    <div class="d-flex flex-wrap gap-2 justify-content-end">
+                                        <a href="{{ route('backups.download', $backup['name']) }}" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                            <i class="bi bi-download"></i> <span class="d-none d-sm-inline">Descarregar</span>
+                                        </a>
+                                        <form action="{{ route('backups.destroy', $backup['name']) }}" method="POST" class="d-inline" onsubmit="return confirm('Deseja eliminar permanentemente esta cópia de segurança? Esta acção não pode ser revertida.');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-outline-danger rounded-pill px-3">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @empty

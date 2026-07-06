@@ -5,12 +5,12 @@
 @section('content')
 <div class="container py-4">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2 mb-4">
         <div>
             <h1 class="h3 mb-1 text-scd-primary fw-bold"><i class="bi bi-journal-text text-primary me-2"></i>Auditoria</h1>
             <p class="text-muted mb-0">Registo imutável de todos os eventos de segurança do sistema.</p>
         </div>
-        <span class="badge bg-primary bg-opacity-20 text-primary rounded-pill px-3 py-2">
+        <span class="badge bg-primary bg-opacity-20 text-primary rounded-pill px-3 py-2 align-self-start align-self-sm-center">
             {{ $logs->total() }} eventos
         </span>
     </div>
@@ -19,7 +19,7 @@
     <div class="card bg-scd-surface border border-secondary shadow mb-4">
         <div class="card-body p-3">
             <form method="GET" action="{{ route('audit.index') }}" class="row g-2 align-items-end">
-                <div class="col-md-3">
+                <div class="col-12 col-sm-6 col-md-3">
                     <label class="form-label text-muted small mb-1">Utilizador</label>
                     <select name="user_id" class="form-select form-select-sm bg-scd-surface text-scd-primary border-secondary">
                         <option value="">Todos</option>
@@ -30,7 +30,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-12 col-sm-6 col-md-3">
                     <label class="form-label text-muted small mb-1">Acção</label>
                     <select name="action" class="form-select form-select-sm bg-scd-surface text-scd-primary border-secondary">
                         <option value="">Todas</option>
@@ -41,17 +41,17 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-6 col-md-2">
                     <label class="form-label text-muted small mb-1">De</label>
                     <input type="date" name="from" value="{{ request('from') }}"
                            class="form-control form-control-sm bg-scd-surface text-scd-primary border-secondary">
                 </div>
-                <div class="col-md-2">
+                <div class="col-6 col-md-2">
                     <label class="form-label text-muted small mb-1">Até</label>
                     <input type="date" name="to" value="{{ request('to') }}"
                            class="form-control form-control-sm bg-scd-surface text-scd-primary border-secondary">
                 </div>
-                <div class="col-md-2 d-flex gap-2">
+                <div class="col-12 col-md-2 d-flex gap-2">
                     <button type="submit" class="btn btn-sm btn-primary flex-fill">
                         <i class="bi bi-funnel me-1"></i>Filtrar
                     </button>

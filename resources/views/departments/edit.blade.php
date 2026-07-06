@@ -39,9 +39,9 @@
                     </select>
                     @error('manager_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
-                <div class="d-flex gap-3">
+                <div class="d-flex flex-column flex-sm-row gap-2 gap-sm-3 mt-2">
                     <button type="submit" class="btn btn-primary px-5"><i class="bi bi-save2 me-2"></i>Guardar</button>
-                    <a href="{{ route('departments.index') }}" class="btn btn-outline-secondary px-4">Cancelar</a>
+                    <a href="{{ route('departments.index') }}" class="btn btn-outline-secondary px-4 text-center">Cancelar</a>
                 </div>
             </form>
         </div>

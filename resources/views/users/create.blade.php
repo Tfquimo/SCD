@@ -90,11 +90,11 @@
                     </div>
                 </div>
 
-                <div class="d-flex gap-3">
+                <div class="d-flex flex-column flex-sm-row gap-2 gap-sm-3 mt-4">
                     <button type="submit" class="btn btn-primary px-5">
-                        <i class="bi bi-person-check-fill me-2"></i>Criar Utilizador
+                        <i class="bi bi-save me-2"></i>Guardar Utilizador
                     </button>
-                    <a href="{{ route('users.index') }}" class="btn btn-outline-secondary px-4">Cancelar</a>
+                    <a href="{{ route('users.index') }}" class="btn btn-outline-secondary px-4 text-center">Cancelar</a>
                 </div>
             </form>
         </div>
