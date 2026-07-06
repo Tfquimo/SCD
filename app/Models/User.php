@@ -58,17 +58,17 @@ class User extends Authenticatable
     // ─── Role helpers ────────────────────────────────────────────────
     public function isAdmin(): bool
     {
-        return strtolower($this->role ?? '') === 'admin' || $this->hasRole('Admin');
+        return strtolower($this->role ?? '') === 'admin' || $this->hasRole('admin');
     }
 
     public function isManager(): bool
     {
-        return strtolower($this->role ?? '') === 'manager' || strtolower($this->role ?? '') === 'gestor' || $this->hasRole('Gestor');
+        return strtolower($this->role ?? '') === 'manager' || strtolower($this->role ?? '') === 'gestor' || $this->hasRole('manager');
     }
 
     public function isEmployee(): bool
     {
-        return strtolower($this->role ?? '') === 'employee' || strtolower($this->role ?? '') === 'funcionário' || $this->hasRole('Funcionário');
+        return strtolower($this->role ?? '') === 'employee' || strtolower($this->role ?? '') === 'funcionário' || $this->hasRole('employee');
     }
 
     // ─── Account state ───────────────────────────────────────────────
