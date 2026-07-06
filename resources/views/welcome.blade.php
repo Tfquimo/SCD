@@ -351,6 +351,73 @@
             text-align: center;
         }
 
+        /* ── Responsive Mobile ── */
+        @media (max-width: 991.98px) {
+            .hero {
+                flex-direction: column;
+                padding-top: 8rem;
+                text-align: center;
+                gap: 2rem;
+            }
+            .hero-content {
+                max-width: 100%;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .hero-buttons {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .hero-features {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .features-footer {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+            .nav-links {
+                display: none; /* Hide standard nav links on mobile for simplicity, or we could add a hamburger */
+            }
+            #como-funciona > div {
+                flex-direction: column;
+            }
+            .hero-image img {
+                width: 100%;
+                max-width: 400px;
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            .hero-buttons a {
+                width: 100%;
+                justify-content: center;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .generic-section {
+                padding: 4rem 5%;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
     </style>
 </head>
 <body>
