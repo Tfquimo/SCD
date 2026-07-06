@@ -41,7 +41,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('view-audit-logs', fn(User $user) => $user->isAdmin());
 
-        Gate::define('manage-users', fn(User $user) => $user->isAdmin());
+        Gate::define('manage-users', fn(User $user) => $user->isAdmin() || $user->isManager());
 
         Gate::define('manage-department', function (User $user, \App\Models\Department $department) {
             return $user->isAdmin() || $user->id === $department->manager_id;

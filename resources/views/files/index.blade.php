@@ -5,10 +5,15 @@
 
 @section('content')
 {{-- ── Cabeçalho da página ──────────────────────────────── --}}
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
     <div>
         <h2 style="font-size:1.35rem;font-weight:700;margin:0 0 .2rem;color:var(--scd-text);">Cofre de Ficheiros</h2>
         <p style="margin:0;font-size:.85rem;color:var(--scd-text-muted);">Todos os ficheiros estão protegidos com criptografia AES-256.</p>
+    </div>
+    <div>
+        <button class="btn-scd-primary w-100 w-md-auto" data-bs-toggle="modal" data-bs-target="#uploadModal">
+            <i class="bi bi-cloud-upload me-2"></i>Upload Seguro
+        </button>
     </div>
 </div>
 
@@ -172,37 +177,7 @@
     </div>
 </div>
 
-            {{-- Formulário de upload --}}
-            <form id="uploadForm" action="{{ route('files.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div style="padding:1.3rem 1.4rem;border-bottom:1px solid var(--scd-border);display:flex;align-items:center;justify-content:space-between;">
-                    <h5 id="uploadModalLabel" style="margin:0;font-size:.95rem;font-weight:600;color:var(--scd-text);">
-                        <i class="bi bi-shield-lock-fill me-2" style="color:var(--scd-primary);"></i>Upload Seguro
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div style="padding:1.3rem 1.4rem;">
-                    <div class="alert-scd-info mb-4" style="display:flex;align-items:center;gap:.6rem;">
-                        <i class="bi bi-info-circle"></i>
-                        <span>O ficheiro será encriptado com AES-256 antes de ser guardado.</span>
-                    </div>
-                    <div class="mb-4">
-                        <label for="uploadName" class="form-label">Nome de Apresentação <span style="color:var(--scd-text-muted);font-size:.78rem;">(Opcional)</span></label>
-                        <input type="text" class="form-control" id="uploadName" name="name" placeholder="Ex: Relatório Financeiro Q3">
-                    </div>
-                    <div class="mb-2">
-                        <label for="uploadFile" class="form-label">Ficheiro *</label>
-                        <input class="form-control" type="file" id="uploadFile" name="file" required>
-                        <div style="font-size:.76rem;color:var(--scd-text-muted);margin-top:.4rem;">Tamanho máximo: 50 MB.</div>
-                    </div>
-                </div>
-                <div style="padding:.9rem 1.4rem;border-top:1px solid var(--scd-border);display:flex;justify-content:flex-end;gap:.6rem;">
-                    <button type="button" class="btn-scd-ghost" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" id="btnUploadSubmit" class="btn-scd-primary">
-                        <i class="bi bi-lock-fill"></i> Encriptar e Guardar
-                    </button>
-                </div>
-            </form>
+
 
             {{-- Overlay de progresso (cobre o modal quando o upload começa) --}}
             <div id="uploadProgressOverlay"

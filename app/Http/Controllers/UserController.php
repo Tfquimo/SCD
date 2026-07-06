@@ -43,12 +43,17 @@ class UserController extends Controller
     /**
      * Mostra o formulário de criação de um utilizador (apenas Admin).
      */
-    public function create()
+    public function create(Request $request)
     {
         Gate::authorize('manage-users');
 
         $departments = Department::orderBy('name')->get();
-        $roles       = Role::orderBy('name')->get();
+        
+        $rolesQuery = Role::orderBy('name');
+        if (! $request->user()->isAdmin()) {
+            $rolesQuery->where('name', '!=', 'admin');
+        }
+        $roles = $rolesQuery->get();
 
         return view('users.create', compact('departments', 'roles'));
     }
@@ -59,6 +64,10 @@ class UserController extends Controller
     public function store(Request $request)
     {
         Gate::authorize('manage-users');
+
+        if (! $request->user()->isAdmin() && $request->input('role') === 'admin') {
+            abort(403, 'Acesso negado: Gestores não podem adicionar administradores.');
+        }
 
         $data = $request->validate([
             'name'          => ['required', 'string', 'max:255'],
@@ -101,12 +110,21 @@ class UserController extends Controller
     /**
      * Mostra o formulário de edição de um utilizador (apenas Admin).
      */
-    public function edit(User $user)
+    public function edit(Request $request, User $user)
     {
         Gate::authorize('manage-users');
 
+        if (! $request->user()->isAdmin() && $user->isAdmin()) {
+            abort(403, 'Acesso negado: Gestores não podem editar administradores.');
+        }
+
         $departments = Department::orderBy('name')->get();
-        $roles       = Role::orderBy('name')->get();
+        
+        $rolesQuery = Role::orderBy('name');
+        if (! $request->user()->isAdmin()) {
+            $rolesQuery->where('name', '!=', 'admin');
+        }
+        $roles = $rolesQuery->get();
 
         return view('users.edit', compact('user', 'departments', 'roles'));
     }
@@ -117,6 +135,15 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         Gate::authorize('manage-users');
+
+        if (! $request->user()->isAdmin()) {
+            if ($user->isAdmin()) {
+                abort(403, 'Acesso negado: Gestores não podem editar administradores.');
+            }
+            if ($request->input('role') === 'admin') {
+                abort(403, 'Acesso negado: Gestores não podem promover utilizadores a administrador.');
+            }
+        }
 
         $data = $request->validate([
             'name'          => ['required', 'string', 'max:255'],
@@ -161,6 +188,10 @@ class UserController extends Controller
     {
         Gate::authorize('manage-users');
 
+        if (! $request->user()->isAdmin() && $user->isAdmin()) {
+            abort(403, 'Acesso negado: Gestores não podem activar administradores.');
+        }
+
         $user->update(['active' => true, 'failed_login_attempts' => 0, 'locked_until' => null]);
 
         AuditLog::create([
@@ -182,6 +213,10 @@ class UserController extends Controller
     public function deactivate(Request $request, User $user)
     {
         Gate::authorize('manage-users');
+
+        if (! $request->user()->isAdmin() && $user->isAdmin()) {
+            abort(403, 'Acesso negado: Gestores não podem desactivar administradores.');
+        }
 
         // Prevent deactivating own account
         if ($user->id === $request->user()->id) {

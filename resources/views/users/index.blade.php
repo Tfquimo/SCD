@@ -5,18 +5,18 @@
 @section('content')
 <div class="container py-4">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
         <div>
             <h1 class="h3 mb-1 text-scd-primary fw-bold"><i class="bi bi-people-fill text-primary me-2"></i>Utilizadores</h1>
             <p class="text-muted mb-0">Gestão de contas, permissões e departamentos.</p>
         </div>
-        <div class="d-flex align-items-center gap-3">
-            <form action="{{ route('users.index') }}" method="GET" class="d-flex align-items-center position-relative">
+        <div class="d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center gap-2 gap-md-3">
+            <form action="{{ route('users.index') }}" method="GET" class="d-flex align-items-center position-relative flex-grow-1">
                 <i class="bi bi-search position-absolute text-muted ms-3"></i>
-                <input type="text" name="search" class="form-control rounded-pill ps-5" placeholder="Pesquisar utilizador..." value="{{ request('search') }}" style="width: 250px;">
+                <input type="text" name="search" class="form-control rounded-pill ps-5 w-100" placeholder="Pesquisar utilizador..." value="{{ request('search') }}" style="min-width: 200px; max-width: 100%;">
             </form>
             @can('manage-users')
-            <a href="{{ route('users.create') }}" class="btn btn-primary px-4 rounded-pill">
+            <a href="{{ route('users.create') }}" class="btn btn-primary px-4 rounded-pill text-nowrap text-center">
                 <i class="bi bi-person-plus-fill me-2"></i>Novo
             </a>
             @endcan
@@ -96,6 +96,7 @@
                             <td class="pe-4 py-3 text-end">
                                 @if(!$user->trashed())
                                 @can('manage-users')
+                                @if(auth()->user()->isAdmin() || !$user->isAdmin())
                                 <a href="{{ route('users.edit', $user) }}" class="btn btn-sm btn-outline-primary rounded-pill px-3 me-1">
                                     <i class="bi bi-pencil"></i>
                                 </a>
@@ -114,6 +115,7 @@
                                         <i class="bi bi-play-circle"></i>
                                     </button>
                                 </form>
+                                @endif
                                 @endif
                                 @endcan
                                 @endif
