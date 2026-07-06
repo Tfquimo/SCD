@@ -14,19 +14,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Define roles using Spatie permission
-        $roleAdmin = Role::create(['name' => 'admin']);
-        $roleManager = Role::create(['name' => 'manager']);
-        $roleEmployee = Role::create(['name' => 'employee']);
+        $roleAdmin = Role::firstOrCreate(['name' => 'admin']);
+        $roleManager = Role::firstOrCreate(['name' => 'manager']);
+        $roleEmployee = Role::firstOrCreate(['name' => 'employee']);
 
         // Create the default super admin user
-        $admin = User::create([
-            'name' => 'Administrador de Sistema',
-            'email' => 'admin@scd.pt',
-            'password' => Hash::make('Admin123!@#'), // Default strong password
-            'role' => 'admin',
-            'active' => true,
-        ]);
+        $admin = User::firstOrCreate(
+            ['email' => 'admin@scd.pt'],
+            [
+                'name' => 'Administrador de Sistema',
+                'password' => Hash::make('Admin123!@#'), // Default strong password
+                'role' => 'admin',
+                'active' => true,
+            ]
+        );
 
         $admin->assignRole($roleAdmin);
 
