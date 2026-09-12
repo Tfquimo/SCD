@@ -136,8 +136,8 @@
 
 {{-- ── Modal de Upload ── --}}
 <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="border-radius:14px;border:1px solid var(--scd-border);box-shadow:0 8px 32px rgba(0,0,0,0.12);">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content" style="position:relative;overflow:hidden;border-radius:14px;border:1px solid var(--scd-border);box-shadow:0 8px 32px rgba(0,0,0,0.12);">
             <form id="uploadForm" action="{{ route('files.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
@@ -173,11 +173,6 @@
                     </button>
                 </div>
             </form>
-        </div>
-    </div>
-</div>
-
-
 
             {{-- Overlay de progresso (cobre o modal quando o upload começa) --}}
             <div id="uploadProgressOverlay"
@@ -193,7 +188,6 @@
                 </div>
                 <div id="progressPercent" style="font-size:.75rem;color:var(--scd-text-muted);font-weight:600;">0%</div>
             </div>
-
         </div>
     </div>
 </div>
@@ -201,7 +195,7 @@
 {{-- Modais de Partilha fora da tabela --}}
 @foreach($files as $file)
 <div class="modal fade" id="shareModal{{ $file->id }}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content" style="border-radius:14px;border:1px solid var(--scd-border);box-shadow:0 8px 32px rgba(0,0,0,0.12);">
 
             {{-- Cabeçalho do modal --}}
