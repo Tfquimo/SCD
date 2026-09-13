@@ -136,19 +136,19 @@
 
 {{-- ── Modal de Upload ── --}}
 <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content" style="position:relative;overflow:hidden;border-radius:14px;border:1px solid var(--scd-border);box-shadow:0 8px 32px rgba(0,0,0,0.12);">
-            <form id="uploadForm" action="{{ route('files.store') }}" method="POST" enctype="multipart/form-data">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="position:relative;border-radius:14px;border:1px solid var(--scd-border);box-shadow:0 8px 32px rgba(0,0,0,0.12);background:var(--scd-surface);">
+            <form id="uploadForm" action="{{ route('files.store') }}" method="POST" enctype="multipart/form-data" style="display:flex;flex-direction:column;margin:0;">
                 @csrf
 
-                <div style="padding:1.3rem 1.4rem;border-bottom:1px solid var(--scd-border);display:flex;align-items:center;justify-content:space-between;">
-                    <h5 id="uploadModalLabel" style="margin:0;font-size:.95rem;font-weight:600;color:var(--scd-text);">
+                <div class="modal-header" style="padding:1.1rem 1.4rem;border-bottom:1px solid var(--scd-border);">
+                    <h5 class="modal-title" id="uploadModalLabel" style="margin:0;font-size:.95rem;font-weight:600;color:var(--scd-text);">
                         <i class="bi bi-shield-lock-fill me-2" style="color:var(--scd-primary);"></i>Upload Seguro
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <div style="padding:1.3rem 1.4rem;">
+                <div class="modal-body" style="padding:1.3rem 1.4rem;">
                     <div style="background:rgba(126,184,164,.1);border:1px solid rgba(126,184,164,.25);border-radius:8px;padding:.75rem 1rem;display:flex;align-items:center;gap:.6rem;margin-bottom:1.2rem;font-size:.84rem;color:var(--scd-text-muted);">
                         <i class="bi bi-info-circle" style="color:var(--scd-primary);"></i>
                         O ficheiro será encriptado com AES-256 antes de ser guardado.
@@ -166,7 +166,7 @@
                     </div>
                 </div>
 
-                <div style="padding:.9rem 1.4rem;border-top:1px solid var(--scd-border);display:flex;justify-content:flex-end;gap:.6rem;">
+                <div class="modal-footer" style="padding:.9rem 1.4rem;border-top:1px solid var(--scd-border);display:flex;justify-content:flex-end;gap:.6rem;">
                     <button type="button" class="btn-scd-ghost" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" id="btnUploadSubmit" class="btn-scd-primary">
                         <i class="bi bi-lock-fill"></i> Encriptar e Guardar
@@ -179,7 +179,7 @@
                  style="display:none;position:absolute;top:0;left:0;right:0;bottom:0;
                         background:var(--scd-surface);z-index:10;
                         align-items:center;justify-content:center;flex-direction:column;
-                        padding:2.5rem;text-align:center;">
+                        padding:2.5rem;text-align:center;border-radius:14px;">
                 <i class="bi bi-shield-lock" style="font-size:2.5rem;color:var(--scd-primary);margin-bottom:1rem;"></i>
                 <h5 id="progressTitle" style="margin-bottom:.4rem;font-weight:700;color:var(--scd-text);">A preparar segurança...</h5>
                 <p id="progressDesc" style="font-size:.85rem;color:var(--scd-text-muted);margin-bottom:1.5rem;">A iniciar rotina AES-256</p>
@@ -195,21 +195,21 @@
 {{-- Modais de Partilha fora da tabela --}}
 @foreach($files as $file)
 <div class="modal fade" id="shareModal{{ $file->id }}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content" style="border-radius:14px;border:1px solid var(--scd-border);box-shadow:0 8px 32px rgba(0,0,0,0.12);">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius:14px;border:1px solid var(--scd-border);box-shadow:0 8px 32px rgba(0,0,0,0.12);background:var(--scd-surface);">
 
             {{-- Cabeçalho do modal --}}
-            <div style="padding:1.3rem 1.4rem;border-bottom:1px solid var(--scd-border);display:flex;align-items:center;justify-content:space-between;">
-                <h5 style="margin:0;font-size:.95rem;font-weight:600;color:var(--scd-text);">
+            <div class="modal-header" style="padding:1.1rem 1.4rem;border-bottom:1px solid var(--scd-border);">
+                <h5 class="modal-title" style="margin:0;font-size:.95rem;font-weight:600;color:var(--scd-text);">
                     <i class="bi bi-share-fill me-2" style="color:var(--scd-accent);"></i>Partilhar Ficheiro
                 </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             {{-- Formulário principal de nova partilha --}}
-            <form action="{{ route('files.share', $file) }}" method="POST">
+            <form action="{{ route('files.share', $file) }}" method="POST" style="margin:0;">
                 @csrf
-                <div style="padding:1.3rem 1.4rem;">
+                <div class="modal-body" style="padding:1.3rem 1.4rem;">
                     <p style="font-size:.84rem;color:var(--scd-text-muted);margin-bottom:1.2rem;">
                         A partilhar: <strong style="color:var(--scd-text);">{{ $file->name }}</strong>
                     </p>
@@ -237,7 +237,7 @@
                         </select>
                     </div>
                 </div>
-                <div style="padding:.9rem 1.4rem;border-top:1px solid var(--scd-border);display:flex;justify-content:flex-end;gap:.6rem;">
+                <div class="modal-footer" style="padding:.9rem 1.4rem;border-top:1px solid var(--scd-border);display:flex;justify-content:flex-end;gap:.6rem;">
                     <button type="button" class="btn-scd-ghost" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn-scd-primary">
                         <i class="bi bi-check-lg"></i> Confirmar Partilha
