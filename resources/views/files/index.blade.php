@@ -134,6 +134,7 @@
     @endif
 </div>
 
+@push('modals')
 {{-- ── Modal de Upload ── --}}
 <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -280,6 +281,7 @@
     </div>
 </div>
 @endforeach
+@endpush
 
 @push('scripts')
 <script>

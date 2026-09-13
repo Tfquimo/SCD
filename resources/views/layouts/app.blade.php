@@ -205,6 +205,8 @@
 
 </div>{{-- /.scd-main --}}
 
+@stack('modals')
+
 {{-- Bootstrap JS — offline --}}
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script>
